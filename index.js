@@ -486,4 +486,526 @@ function getArrayStats(arr) {
 }
 console.log(getArrayStats([1, 2, 3, 4, 5, 6, 7, 8, 9]));
 
+console.log('\n------------22---------');
 
+//Create a function that checks if EVERY object in the array has a "website" property:
+function checkWebsiteProperty(profiles) {
+  return profiles.every(profile => profile.hasOwnProperty("website"));
+}
+
+
+//2. Create a function to FILTER the objects where `city: 'Leipzig'`:
+
+function filterByCity(profiles) {
+  return profiles.filter(profile => profile.city === "Leipzig");
+}
+
+
+//3. Create a function to check if SOME objects have interests in "JavaScript":
+
+function checkJavaScriptInterest(profiles) {
+  return profiles.some(profile => profile.interests.includes("JavaScript"));
+}
+
+
+//4. Create a function that MAPs the keys `name` & `profession` into a new array of objects:
+
+function mapNameAndProfession(profiles) {
+  return profiles.map(profile => ({ name: profile.name, profession: profile.profession }));
+}
+
+
+//5. Create a function that REDUCEs all `phoneNumber.telephone` values:
+
+function reduceTelephoneValues(profiles) {
+  return profiles.reduce((accumulator, profile) => {
+    return accumulator.concat(profile.phoneNumber.telephone);
+  }, []);
+}
+
+
+//6. Create a function to SORT the objects in alphabetical order based on the value of each `name` property:
+function sortByName(profiles) {
+  return profiles.sort((a, b) => a.name.localeCompare(b.name));
+
+}
+
+
+// Task 6
+const isPrime = num => {
+  for(let i = 2, sqrt = Math.sqrt(num); i <= sqrt; i++)
+    if(num % i === 0) return false; 
+  return num > 1;
+};
+
+// Task 7
+const calculateDogYears = humanYears => humanYears * 7;
+
+// Task 8
+const isWaldoHere = str => str.toLowerCase().includes('waldo');
+
+// Task 9
+const filterSortMovies = movies => movies
+  .filter(movie => movie.rating >= 4.0)
+  .sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate))
+  .map(movie => movie.title);
+
+// Task 10
+const library = [/* your books here */];
+const sortByPageCount = books => [...books].sort((a, b) => a.pages - b.pages);
+const sortByReadStatus = books => [...books].sort((a, b) => a.read === b.read ? 0 : a.read ? 1 : -1);
+const sortByTitle = books => [...books].sort((a, b) => a.title.localeCompare(b.title));
+
+console.log('\n------------23---------');
+const mathMethods = {
+  addition(...numbers) {
+    return numbers.reduce((sum, num) => sum + num, 0);
+  },
+  subtraction(...numbers) {
+    return numbers.reduce((result, num) => result - num);
+  },
+  division(...numbers) {
+    return numbers.reduce((result, num) => result / num);
+  },
+  multiplication(...numbers) {
+    return numbers.reduce((result, num) => result * num, 1);
+  }
+};
+
+const {subtraction, division, multiplication } = mathMethods;
+
+// Usage examples:
+console.log(addition(2, 3, 5)); // Output: 10
+console.log(subtraction(10, 4, 2)); // Output: 4
+console.log(division(20, 2, 5)); // Output: 2
+console.log(multiplication(2, 3, 4)); // Output: 24
+
+console.log('\n------------24---------');
+class WaterTracker {
+  static unit = "liters";
+  constructor(waterIntakeGoal) {
+    this.waterIntakeGoal = waterIntakeGoal;
+    this.volumeConsumed = 0;
+  }
+
+  get progress() {
+    const remaining = this.waterIntakeGoal - this.volumeConsumed;
+    return `You have consumed ${this.volumeConsumed} ${WaterTracker.unit}, you still need ${remaining} ${WaterTracker.unit} to reach your goal.`;
+  }
+
+  set consume(amount) {
+    this.volumeConsumed += amount;
+    if (this.volumeConsumed >= this.waterIntakeGoal) {
+      console.log("Congratulations! You have reached your water goal for the day.");
+    } else {
+      const remaining = this.waterIntakeGoal - this.volumeConsumed;
+      console.log(`Keep drinking! You still need ${remaining} ${WaterTracker.unit} of water to meet your goal.`);
+    }
+  }
+
+  static getUnit() {
+    return this.unit;
+  }
+}
+
+class personOne {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  static species = "human";
+
+  get info() {
+    return `${this.name} is ${this.age} years old.`;
+  }
+
+  set age(newAge) {
+    if (typeof newAge === "number" && newAge >= 1 && newAge <= 200) {
+      this._age = newAge;
+    } else {
+      console.log("Only ages between 1 and 200 are valid.");
+    }
+  }
+
+  static getSpecies() {
+    return Person.species;
+  }
+}
+
+const person9 = new Person("John");
+person.updateAge = 30;
+console.log(person.info);
+console.log(Person.species);
+
+
+console.log('\n------------25---------');
+
+
+// Challenge 1
+//class PersonTwo {
+ /* constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() {
+    console.log(`Hi, my name is ${this.name} and I am ${this.age} years old.`);
+  }
+
+
+const person6 = new Person("John", 30);
+person6.greet();/**/
+
+console.log('\n------------26---------');
+
+
+class Student extends Person {
+  constructor(name, age, grade) {
+    super(name, age);
+    this.grade = grade;
+  }
+
+  study() {
+    console.log(`I am studying in grade ${this.grade}.`);
+  }
+}
+
+// Challenge 2
+class Shape {
+  constructor(color) {
+    this.color = color;
+  }
+
+  getColor() {
+    return this.color;
+  }
+}
+
+class Circle extends Shape {
+  constructor(color, radius) {
+    super(color);
+    this.radius = radius;
+  }
+
+  getArea() {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+const circle = new Circle("red", 10);
+console.log(circle.getColor());
+
+// Challenge 3
+class Vehicle {
+  constructor(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`The ${this.make} ${this.model} ${this.year} is starting - vroom vroom!.`);
+  }
+}
+
+class Car extends Vehicle {
+  constructor(make, model, year, color) {
+    super(make, model, year);
+    this.color = color;
+  }
+
+  stop() {
+    console.log(`The ${this.color} ${this.make} ${this.model} ${this.year} is stopping.`);
+  }
+}
+
+
+console.log('\n------------27---------');
+
+function generateRandomNumber(min, max) {
+  
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+console.log(generateRandomNumber(1, 10));
+
+console.log('\n------------28---------');
+
+const array = ["one", "two", "three"];
+for (let i = 0; i < array.length; i++) {
+ console.log(array[i]);
+}
+
+console.log('\n------------29---------');
+const myArray1 = ["one", "two", "three"];
+myArray1.forEach(element => console.log(element));
+
+console.log('\n------------30---------');
+//We have the values 4,3,5,8; put these values in a array, sort this array and console.log() this array.
+let myArray2 = [4,3,5,8];
+myArray2.sort();
+console.log(myArray2);
+
+console.log('\n------------31---------');
+
+function fizzBuzz(number) {
+  for (let i = 1; i <= number; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      console.log("FizzBuzz");
+    } else if (i % 3 === 0) {
+      console.log("Fizz");
+    } else if (i % 5 === 0) {
+      console.log("Buzz");
+    } else {
+      console.log(i);
+    }
+  }
+}
+
+fizzBuzz(40);
+
+console.log('\n------------32---------');
+
+//If a number is a multiple of 3 the function returns fizz If a number is a multiple of 5 the function returns buzz If a number is a multiple of 3 AND 5 the function returns fizzbuzz As a sequence it would be: 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, Fizz Buzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, Fizz Buzz, 31, 32, Fizz, 34, Buzz, Fizz
+
+function fizzBuzz1(number) {
+  for (let i = 1; i <= number; i++) {
+    let output = "";
+    if (i % 3 === 0) {
+      output += "Fizz";
+    }
+    if (i % 5 === 0) {
+      output += "Buzz";
+    }
+    console.log(output || i);
+  }
+}
+
+fizzBuzz1(30);
+
+
+console.log('\n------------33---------');
+
+const fizzBuzz4 = () => {
+  for (let i = 1; i <= 50; i++) {
+     if (i % 3 === 0 && i % 5 === 0) {
+      console.log ("FizzBuzz")
+    }
+   else if (i % 3 === 0) {
+      console.log ("Fizz")
+    }
+    else if (i % 5 === 0) {
+      console.log ("Buzz")
+    }
+    
+    else {
+      console.log(i);
+    }
+    
+  }
+
+
+}
+
+fizzBuzz4 ()
+
+
+console.log('\n------------34---------');
+const inventors = [
+  {
+    first: "Albert",
+    last: "Einstein",
+    year: 1879,
+    passed: 1955,
+    categories: ["man", "physicist"],
+  },
+  {
+    first: "Isaac",
+    last: "Newton",
+    year: 1643,
+    passed: 1727,
+    categories: ["man", "mathematician"],
+  },
+  { first: "Galileo", last: "Galilei", year: 1564, passed: 1642 },
+  {
+    first: "Marie",
+    last: "Curie",
+    year: 1867,
+    passed: 1934,
+    categories: ["woman", "physicist"],
+  },
+  { first: "Johannes", last: "Kepler", year: 1571, passed: 1630 },
+  { first: "Nicolaus", last: "Copernicus", year: 1473, passed: 1543 },
+  { first: "Max", last: "Planck", year: 1858, passed: 1947 },
+  {
+    first: "Katherine",
+    last: "Blodgett",
+    year: 1898,
+    passed: 1979,
+    categories: ["woman", "physicist"],
+  },
+  { first: "Ada", last: "Lovelace", year: 1815, passed: 1852 },
+  { first: "Sarah E.", last: "Goode", year: 1855, passed: 1905 },
+  {
+    first: "Lise",
+    last: "Meitner",
+    year: 1878,
+    passed: 1968,
+    categories: ["woman", "physicist"],
+  },
+  {
+    first: "Hanna",
+    last: "Hammarström",
+    year: 1829,
+    passed: 1909,
+    categories: ["woman", "inventor"],
+  },
+];
+
+// Array.prototype.filter()
+// 1. Filter the list of inventors to retrieve only those born between 1500 and 1600
+console.log("\n------------01---------");
+const inventorsBornBetween1500And1600 = inventors.filter(
+  (inventor) => inventor.year >= 1500 && inventor.year < 1600
+);
+console.log(inventorsBornBetween1500And1600);
+
+// Array.prototype.filter()
+// 2. Filter the list of inventors to retrieve only the ones that have the "mathematician" category
+console.log("\n------------02---------");
+const inventorsMathematician = inventors.filter(
+  (inventor) =>
+    inventor.categories && inventor.categories.includes("mathematician")
+);
+console.log(inventorsMathematician);
+
+// Array.prototype.filter()
+// 3. Filter the list of inventors to retrieve only the ones with the category === 'physicist' AND 'man'
+console.log("\n------------03---------");
+const inventorsMan = inventors.filter(
+  (inventor) => inventor.categories && inventor.categories.includes("man")
+);
+console.log(inventorsMan);
+
+// Array.prototype.map()
+// 4. Give us an array filled only with the inventors last names
+console.log("\n------------04---------");
+const inventorsLastNames = inventors.map((inventor) => inventor.last);
+console.log(inventorsLastNames);
+
+// Array.prototype.map()
+// 5. Give us an array filled only with the inventors emails
+// the emails should be lowercase firstName + date of birth @ inventor.com
+// eg: albert1879@inventor.com
+console.log("\n------------05---------");
+const inventorsEmails = inventors.map(
+  (inventor) => inventor.first.toLowerCase() + inventor.year + "@inventor.com"
+);
+console.log(inventorsEmails);
+
+// Array.prototype.sort()
+// 6. Sort the inventors by birthdate, oldest to youngest
+console.log("\n------------06---------");
+const inventorsSortedByBirthdate = inventors.sort((a, b) => a.year - b.year);
+console.log(inventorsSortedByBirthdate);
+
+console.log("\n------------02---------");
+
+function addMessage(message, me = true) {
+  const template = `<div class="message">
+    <div class="${me ? "myMessage" : "fromThem"}"
+    data-date="${new Date().toLocaleTimeString()}">
+      <p>${message}</p>
+      <date> ${new Date().toLocaleTimeString()} </date>
+    </div>
+  </div>`;
+
+  document.querySelector(".chat .messages").innerHTML += template;
+}
+
+function typing() {
+  document.querySelector(".typing").classList.toggle("active");
+  setTimeout(() => {
+    document.querySelector(".typing").classList.toggle("active");
+  }, 1000);
+}
+typing();
+
+addMessage("Hi!", false);
+addMessage("In this exercise you will work with events in JS", false);
+addMessage("Let's go!");
+
+/**
+ * Listen to the submit of the form and add a new message
+ * with addMessage()
+ */
+// Hint : event.preventDefault()
+// Code here
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const message = document.querySelector("input").value;
+  addMessage(message);
+  document.querySelector("input").value = "";
+});
+
+
+
+/**
+ * Listen to the click on each message and create an alert
+ * https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
+ */
+// Bonus : Display the date of the message
+
+// Code here
+const messages = document.querySelectorAll(".message");
+messages.forEach((message) => {
+  message.addEventListener("click", () => {
+    alert(message.dataset.date);
+  });
+});
+
+
+/**
+ * Listen to every Keydown (from the keyboard) in the input and call
+ * the function typing()
+ */
+
+// Code here
+const input = document.querySelector("input");
+input.addEventListener("keydown", typing);
+
+
+
+console.log('\n------------03---------');
+
+// Array of book objects with information
+const books = [
+    { title: "The Great Gatsby", author: "F. Scott Fitzgerald", year: 1925 },
+    { title: "To Kill a Mockingbird", author: "Harper Lee", year: 1960 },
+    { title: "1984", author: "George Orwell", year: 1949 },
+    { title: "The Catcher in the Rye", author: "J.D. Salinger", year: 1951 },
+    { title: "The Hobbit", author: "J.R.R. Tolkien", year: 1937 },
+    { title: "Harry Potter and the Sorcerer's Stone", author: "J.K. Rowling", year: 1997 },
+];
+
+// Function to create a new array with book titles and authors
+
+
+
+
+
+// Function to filter books published after a certain year
+
+
+// Use map to create a new array with book titles and authors
+const bookInfoArray = books.map(extractBookInfo);
+
+// Use filter to select books published after 1950
+const modernBooks = books.filter(publishedAfterYear(1950));
+
+// Print the original book data, book titles and authors, and modern books
+console.log("Original Book Data:", books);
+console.log("Book Titles and Authors:", bookInfoArray);
+console.log("Modern Books (Published after 1950):", modernBooks);
